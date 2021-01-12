@@ -1,0 +1,5 @@
+On this example I'm using some sort of POM for the login and log out
+but I'm not trying to use POM for all the specs / tests, that's why
+even when I have the selectors defined in the page objects, I'm not 
+creating methods for every action, instead, I'm doing regular Cypress 
+tests, and using the selectors created in the page objects.
