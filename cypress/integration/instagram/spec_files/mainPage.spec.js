@@ -56,8 +56,8 @@ describe ('Main Page Scenarios', () =>{
         // Check the account Name is the expected
         cy.get(profileNameSelector).should('contain', accountToSearch)
 
-        // Select the second post 
-        cy.get(profilePicSelector).eq(1).click()
+        // Select the 4th post 
+        cy.get(profilePicSelector).eq(3).click()
 
         // Check the number of likes is different (could decrease if was already liked)
         cy.get(likeCounterSelector).then(($count) => {
@@ -79,7 +79,7 @@ describe ('Main Page Scenarios', () =>{
 
     })
 
-    it.only('Search and comment a post', () =>{
+    it('Search and comment a post', () =>{
 
         // Go to search and enter the value
         cy.get(basePage.searchBox).click({force: true}).type(accountToSearch)
@@ -89,15 +89,15 @@ describe ('Main Page Scenarios', () =>{
         // Check the account Name is the expected
         cy.get(profileNameSelector).should('contain', accountToSearch)
 
-        // Select the second post 
-        cy.get(profilePicSelector).eq(1).click()
+        // Select the 4th post 
+        cy.get(profilePicSelector).eq(3).click()
 
         // Comment of the post
         cy.get(commentFieldSelector).type(testComment)
         cy.get(postButtonSelector).click()
 
         // Confirm comment and delete it
-        cy.contains(testComment)
+        cy.get('span').should('contain', testComment)
         cy.get(commentOptionsSelector).eq(0).click({force: true})
         cy.get(deleteCommentSelector).eq(1).click()
 
