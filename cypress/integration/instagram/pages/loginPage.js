@@ -18,6 +18,7 @@ class loginPage {
         this.saveLoginLabel = 'Save Your Login Info?'
         this.notNowLabel = 'Not Now'
         this.landingPageLabel = 'Getting Started'
+        this.expectedLandingURL = 'www.instagram.com'
         this.wrongPassText = 'Sorry, your password was incorrect. Please double-check your password.'
 
     }
@@ -33,8 +34,8 @@ class loginPage {
         cy.contains(this.notNowLabel).click()
         cy.contains(this.notNowLabel).click()
 
-        // verify label on landing page
-        cy.get('div').should('contain', this.landingPageLabel)
+        // verify URL on landing page
+        cy.url().should('include', this.expectedLandingURL)
     }
 }
 
