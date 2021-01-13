@@ -89,15 +89,15 @@ describe ('Main Page Scenarios', () =>{
         // Check the account Name is the expected
         cy.get(profileNameSelector).should('contain', accountToSearch)
 
-        // Select the second post 
-        cy.get(profilePicSelector).eq(1).click()
+        // Select the 4th post 
+        cy.get(profilePicSelector).eq(3).click()
 
         // Comment of the post
         cy.get(commentFieldSelector).type(testComment)
         cy.get(postButtonSelector).click()
 
         // Confirm comment and delete it
-        cy.contains(testComment).should('be.visible')
+        cy.get('span').should('contain', testComment).as('testComment')
         cy.get(commentOptionsSelector).eq(0).click({force: true})
         cy.get(deleteCommentSelector).eq(1).click()
 
