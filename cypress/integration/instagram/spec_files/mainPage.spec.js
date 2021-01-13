@@ -97,7 +97,7 @@ describe ('Main Page Scenarios', () =>{
         cy.get(postButtonSelector).click()
 
         // Confirm comment and delete it
-        cy.contains(testComment)
+        cy.contains(testComment).should('be.visible')
         cy.get(commentOptionsSelector).eq(0).click({force: true})
         cy.get(deleteCommentSelector).eq(1).click()
 

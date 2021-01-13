@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import loginPage from '../pages/loginPage';
-import loginPage from '../pages/basePage';
 import basePage from '../pages/basePage';
 
 describe ('Login Process for Instagram', () =>{
@@ -61,8 +60,8 @@ describe ('Login Process for Instagram', () =>{
         cy.contains(loginPage.notNowLabel).click()
         cy.contains(loginPage.notNowLabel).click()
 
-        // Verify label on landing page
-        cy.get('div').should('contain', loginPage.landingPageLabel)
+        // verify URL on landing page
+        cy.url().should('include', loginPage.expectedLandingURL)
     })
 
 })
