@@ -22,11 +22,11 @@ describe ('Main Page Scenarios', () =>{
     })
 
     // Selectors and Labels 
-    const accountToSearch = 'Ernesto Muñoz Barquero'
+    const accountToSearch = 'Ernesto Muñoz Barquero'
     const profileNameSelector = '.rhpdm'
     const profilePicSelector = '.v1Nh3.kIKUG._bz0w'
     const likeButtonSelector = 'button > div > span > svg'
-    const likeCounterSelector = 'div > div > button > span'
+    const likeCounterSelector = 'section > div > div > a > span'
     const closePhotoModal = '.QBdPU' // should use last
     const commentFieldSelector = '.Ypffh'
     const testComment = 'This is a test comment'
@@ -46,63 +46,65 @@ describe ('Main Page Scenarios', () =>{
 
     })
 
-    it('Search and like post', () =>{
+    context('Interact with posts', () => {
 
-        // Go to search and enter the value
-        cy.get(basePage.searchBox).click({force: true}).type(accountToSearch)
-        cy.get(basePage.listInSearchBox).first().click()
-        cy.get(basePage.clearSearchButton).click()
+        beforeEach ( ()=> {
 
-        // Check the account Name is the expected
-        cy.get(profileNameSelector).should('contain', accountToSearch)
+            // Go to search and enter the value
+            cy.get(basePage.searchBox).click({force: true}).type(accountToSearch)
+            cy.get(basePage.listInSearchBox).first().click()
+            cy.get(basePage.clearSearchButton).click()
+    
+            // Check the account Name is the expected
+            //cy.contains(accountToSearch)
+            cy.get(profileNameSelector).should('contain', accountToSearch)
 
-        // Select the second post 
-        cy.get(profilePicSelector).eq(1).click()
-
-        // Check the number of likes is different (could decrease if was already liked)
-        cy.get(likeCounterSelector).then(($count) => {
-
-            // Store the counter's text
-            const counterValue = $count.text()
-          
-            // Like to post
-            cy.get(likeButtonSelector).click()
-          
-            // Compare the number of likes to confirm it's different 
-            cy.get(likeCounterSelector).should(($count2) => {
-              expect($count2.text()).not.to.eq(counterValue)
-            })
         })
 
-        // Close the Photo Modal Window
-        cy.get(closePhotoModal).last().click()
+        afterEach ( ()=> {
 
-    })
+            // Close the Photo Modal Window
+            cy.get(closePhotoModal).last().click()
+    
+        })
 
-    it.only('Search and comment a post', () =>{
-
-        // Go to search and enter the value
-        cy.get(basePage.searchBox).click({force: true}).type(accountToSearch)
-        cy.get(basePage.listInSearchBox).first().click()
-        cy.get(basePage.clearSearchButton).click()
-
-        // Check the account Name is the expected
-        cy.get(profileNameSelector).should('contain', accountToSearch)
-
-        // Select the 4th post 
-        cy.get(profilePicSelector).eq(3).click()
-
-        // Comment of the post
-        cy.get(commentFieldSelector).type(testComment)
-        cy.get(postButtonSelector).click()
-
-        // Confirm comment and delete it
-        cy.get('span').should('contain', testComment).as('testComment')
-        cy.get(commentOptionsSelector).eq(0).click({force: true})
-        cy.get(deleteCommentSelector).eq(1).click()
-
-        // Close the Photo Modal Window
-        cy.get(closePhotoModal).last().click()
+        it('Search and like post', () =>{
+    
+            // Select the second post 
+            cy.get(profilePicSelector).eq(1).click()
+    
+            // Check the number of likes is different (could decrease if was already liked)
+            cy.get(likeCounterSelector).then(($count) => {
+    
+                // Store the counter's text
+                const counterValue = $count.text()
+              
+                // Like to post
+                cy.get(likeButtonSelector).click()
+              
+                // Compare the number of likes to confirm it's different 
+                cy.get(likeCounterSelector).should(($count2) => {
+                  expect($count2.text()).not.to.eq(counterValue)
+                })
+            })
+    
+        })
+    
+        it('Search and comment a post', () =>{
+    
+            // Select the 4th post 
+            cy.get(profilePicSelector).eq(3).click()
+    
+            // Comment of the post
+            cy.get(commentFieldSelector).type(testComment)
+            cy.get(postButtonSelector).click()
+    
+            // Confirm comment and delete it
+            cy.get('span').should('contain', testComment).as('testComment')
+            cy.get(commentOptionsSelector).eq(0).click({force: true})
+            cy.get(deleteCommentSelector).eq(1).click()
+    
+        })
 
     })
 

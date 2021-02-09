@@ -5,7 +5,7 @@ import basePage from '../pages/basePage';
 describe ('Login Process for Instagram', () =>{
 
     beforeEach( ()=> {
-        
+
         // Log in and check the page label
         cy.visit('/')
         cy.get('h1').should('contain', loginPage.mainPageLabel)
@@ -56,8 +56,7 @@ describe ('Login Process for Instagram', () =>{
         cy.get(loginPage.loginButton).click()
 
         // Check label and select NO on options
-        cy.get(loginPage.saveLogin).should('contain', loginPage.saveLoginLabel)
-        cy.contains(loginPage.notNowLabel).click()
+        cy.get(loginPage.turnNotifications).should('contain', loginPage.turnNotificationsLabel)
         cy.contains(loginPage.notNowLabel).click()
 
         // verify URL on landing page

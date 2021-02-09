@@ -6,6 +6,7 @@ class loginPage {
         this.passWord = 'input[name=password]'
         this.loginButton = 'button[type=submit]'
         this.saveLogin = '.olLwo'
+        this.turnNotifications = '.yUEEX.KV-D4.uL8Hv'
         this.wrongPass = '#slfErrorAlert'
 
         // Credentials
@@ -16,6 +17,7 @@ class loginPage {
         // Labels
         this.mainPageLabel = 'Instagram'
         this.saveLoginLabel = 'Save Your Login Info?'
+        this.turnNotificationsLabel = 'Turn on Notifications'
         this.notNowLabel = 'Not Now'
         this.landingPageLabel = 'Getting Started'
         this.expectedLandingURL = 'www.instagram.com'
@@ -30,8 +32,7 @@ class loginPage {
         cy.get(this.loginButton).click()
 
         // check label and select NO on options
-        cy.get(this.saveLogin).should('contain', this.saveLoginLabel)
-        cy.contains(this.notNowLabel).click()
+        cy.get(this.turnNotifications).should('contain', this.turnNotificationsLabel)
         cy.contains(this.notNowLabel).click()
 
         // verify URL on landing page
