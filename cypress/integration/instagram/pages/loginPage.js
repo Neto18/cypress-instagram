@@ -31,9 +31,12 @@ class loginPage {
         cy.get(this.passWord).type(this.pass)
         cy.get(this.loginButton).click()
 
-        // check label and select NO on options
-        cy.get(this.turnNotifications).should('contain', this.turnNotificationsLabel)
-        cy.contains(this.notNowLabel).click()
+        // This is to avoid issues when running headless or in Jenkins
+        if (Cypress.isBrowser('chrome')) {
+            // Check label and select NO on options
+            cy.get(loginPage.turnNotifications).should('contain', loginPage.turnNotificationsLabel)
+            cy.contains(loginPage.notNowLabel).click()
+        }
 
         // verify URL on landing page
         cy.url().should('include', this.expectedLandingURL)

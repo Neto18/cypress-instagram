@@ -22,6 +22,7 @@ describe ('Main Page Scenarios', () =>{
     })
 
     // Selectors and Labels 
+    const ownAccount = 'Ernesto TEST Account'
     const accountToSearch = 'Ernesto Muñoz Barquero'
     const profileNameSelector = '.rhpdm'
     const profilePicSelector = '.v1Nh3.kIKUG._bz0w'
@@ -36,6 +37,9 @@ describe ('Main Page Scenarios', () =>{
 
     it('Basic Search of an account', () =>{
 
+        // Confirms the page loaded by checking the account name
+        cy.contains(ownAccount)
+
         // Go to search and enter the value
         cy.get(basePage.searchBox).click({force: true}).type(accountToSearch)
         cy.get(basePage.listInSearchBox).first().click()
@@ -49,6 +53,9 @@ describe ('Main Page Scenarios', () =>{
     context('Interact with posts', () => {
 
         beforeEach ( ()=> {
+
+            // Confirms the page loaded by checking the account name
+            cy.contains(ownAccount)
 
             // Go to search and enter the value
             cy.get(basePage.searchBox).click({force: true}).type(accountToSearch)
