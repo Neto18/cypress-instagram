@@ -1,14 +1,20 @@
 pipeline {
     agent {
         docker {
-            image 'node:6-alpine' 
+            image 'cypress/base:12.16.1' 
             args '-p 3000:3000' 
         }
     }
     stages {
-        stage('Build') { 
+        stage('Install Dependencies') { 
             steps {
-                sh 'npm install' 
+                sh 'npm ci'
+                sh 'npm run cy:verify'
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh 'npm run cy-run'
             }
         }
     }
